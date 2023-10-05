@@ -1,0 +1,85 @@
+<!-- accuracy.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSI Bitcoin Calculator</title>
+    <style>
+        /* Add your CSS styles here */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>RSI Bitcoin Calculator</h1>
+    <!-- Update the form action to point to the calculate_accuracy view -->
+    <form action="{% url 'calculate_accuracy' %}" method="post">
+        {% csrf_token %}
+        <label for="crypto">Select Cryptocurrency:</label>
+        <select name="crypto" id="crypto">
+            <option value="btc">Bitcoin (BTC-USD)</option>
+            <option value="ltc">Litecoin (LTC-USD)</option>
+            <option value="eth">Ethereum (ETH_USD)</option>
+        </select>
+        <br><br>
+        <label for="startdate">Start Date:</label>
+        <input type="date" name="start_date" id="startdate">
+        <br><br>
+        <label for="enddate">End Date:</label>
+        <input type="date" name="end_date" id="enddate">
+        <br><br>
+        <input type="submit" value="Calculate Accuracy">
+    </form>
+    <br><br>
+    <h2>Accuracy of RSI for BTC-USD from startdate midnight to enddate midnight:</h2>
+    <p>Accuracy results</p>
+
+    <h2>Chart</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>QQQQ Close</th>
+                <th>Change</th>
+                <th>Gain</th>
+                <th>Loss</th>
+                <th>Avg Gain</th>
+                <th>Avg Loss</th>
+                <th>RS</th>
+                <th>14-day RSI</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+                <tr>
+                    <td>{{ row.Date }}</td>
+                    <td>{{ row.AdjClose }}</td>
+                    <td>{{ row.Gain }}</td>
+                    <td>{{ row.Loss }}</td>
+                    <td>{{ row.AvgGain }}</td>
+                    <td>{{ row.AvgLoss }}</td>
+                    <td>{{ row.RS }}</td>
+                    <td>{{ row.RSI }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

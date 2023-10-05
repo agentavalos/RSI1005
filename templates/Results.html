@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSI Bitcoin Calculator - Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: black; /* Set text color to black */
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            border: 1px solid black; /* Set table border to black */
+        }
+        th, td {
+            border: 1px solid black; /* Set cell borders to black */
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>RSI Bitcoin Calculator - Results</h1>
+    <p>Accuracy: {{ accuracy }}%</p>
+
+    <h2>Chart</h2>
+    <table>
+        <!-- Add your table headers here -->
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Close</th>
+                <th>Gain</th>
+                <th>Loss</th>
+                <th>Avg Gain</th>
+                <th>RS</th>
+                <th>14-Day RSI</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data_row in data %}
+                <tr>
+                    
+                    <!-- Add your table data here -->
+                    <td>{{ data_row.Date }}</td>
+                    <td>{{ data_row.Close }}</td>
+                    <td>{{ data_row.Gain }}</td>
+                    <td>{{ data_row.Loss }}</td>
+                    <td>{{ data_row.avg_gain }}</td>
+                    <td>{{ data_row.RS }}</td>
+                    <td>{{ data_row.RSI }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
