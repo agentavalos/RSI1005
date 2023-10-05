@@ -63,9 +63,18 @@ def calculate_accuracy(request):
         accuracy = (correct_signals.sum() / len(result_data)) * 100
 
         # Prepare data for rendering with correct variable names
+
+        results = result_data.to_dict(orient='records')
+
+        for row in results :
+            row["Adj_Close"] = row.pop("Adj Close")
+            row["Avg_gain"] = row.pop("Avg Gain")
+            
+
+
         context = {
             'accuracy': accuracy,
-            'data': result_data.to_dict(orient='records')
+            'data': results
         }
 
         # Render the results in 'Results.html'

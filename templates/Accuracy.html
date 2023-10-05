@@ -48,38 +48,9 @@
         <input type="submit" value="Calculate Accuracy">
     </form>
     <br><br>
-    <h2>Accuracy of RSI for BTC-USD from startdate midnight to enddate midnight:</h2>
-    <p>Accuracy results</p>
+  
 
-    <h2>Chart</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>QQQQ Close</th>
-                <th>Change</th>
-                <th>Gain</th>
-                <th>Loss</th>
-                <th>Avg Gain</th>
-                <th>Avg Loss</th>
-                <th>RS</th>
-                <th>14-day RSI</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in data %}
-                <tr>
-                    <td>{{ row.Date }}</td>
-                    <td>{{ row.AdjClose }}</td>
-                    <td>{{ row.Gain }}</td>
-                    <td>{{ row.Loss }}</td>
-                    <td>{{ row.AvgGain }}</td>
-                    <td>{{ row.AvgLoss }}</td>
-                    <td>{{ row.RS }}</td>
-                    <td>{{ row.RSI }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+    
 </body>
 </html>
