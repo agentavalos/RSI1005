@@ -1,6 +1,6 @@
-<!-- accuracy.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,8 @@
             width: 100%;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid black;
             text-align: center;
             padding: 8px;
@@ -25,12 +26,44 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+
+        #loading-spinner {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            z-index: 9999;
+        }
+
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
+
 <body>
     <h1>RSI Bitcoin Calculator</h1>
     <!-- Update the form action to point to the calculate_accuracy view -->
-    <form action="{% url 'calculate_accuracy' %}" method="post">
+    <form action="{% url 'calculate_accuracy' %}" method="post" onsubmit="return validateForm()">
         {% csrf_token %}
         <label for="crypto">Select Cryptocurrency:</label>
         <select name="crypto" id="crypto">
@@ -44,13 +77,64 @@
         <br><br>
         <label for="enddate">End Date:</label>
         <input type="date" name="end_date" id="enddate">
+        <p id="dateReminder" style="color: red;"></p> <!-- Add a reminder paragraph -->
+
         <br><br>
-        <input type="submit" value="Calculate Accuracy">
+        <input type="submit" value="Submit">
+
     </form>
+
+    <div id="loading-spinner" class="hidden">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
     <br><br>
-  
+    <h2>Accuracy of RSI for BTC-USD please use a range of minimum 3 months</h2>
 
+    <script>
+        // Function to hide the loading spinner
+        function hideLoadingSpinner() {
+            document.getElementById('loading-spinner').style.display = 'none';
+        }
 
-    
+        // Check if the page URL contains a query parameter indicating a successful form submission
+        const urlParams = new URLSearchParams(window.location.search);
+        const submissionSuccess = urlParams.has('submissionSuccess');
+
+        // Hide the loading spinner if a submission success query parameter is present
+        if (submissionSuccess) {
+            hideLoadingSpinner();
+        }
+
+        // Hide the loading spinner when the page loads (including when navigating back)
+         window.onload = function() {
+            hideLoadingSpinner();
+        };
+        function validateForm() {
+            // Show loading spinner
+            document.getElementById('loading-spinner').style.display = 'block';
+
+            var startDate = document.getElementById("startdate").value;
+            var endDate = document.getElementById("enddate").value;
+            var dateReminder = document.getElementById("dateReminder");
+
+            if (!startDate || !endDate) {
+                dateReminder.innerText = "Please select a date range.";
+                dateReminder.style.display = "block";
+
+                // Hide loading spinner since there was an error
+                hideLoadingSpinner()
+
+                return false; // Prevent form submission
+            } else {
+                dateReminder.style.display = "none";
+
+                // You may want to keep the loading spinner visible if there's more work to do
+
+                return true; // Allow form submission
+            }
+        }
+    </script>
 </body>
+
 </html>

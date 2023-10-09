@@ -27,8 +27,35 @@
 </head>
 <body>
     <h1>RSI Bitcoin Calculator - Results</h1>
-    <p>Accuracy: {{ accuracy }}%</p>
-
+    
+    <h2>Accuracy</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Signal</th>
+                <th>Accuracy</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Buy</td>
+                <td>{{ accuracy_buy }}%</td>
+            </tr>
+            <tr>
+                <td>Sell</td>
+                <td>{{ accuracy_sell }}%</td>
+            </tr>
+            <tr>
+                <td>Hold</td>
+                <td>{{ accuracy_hold }}%</td>
+            </tr>
+            <tr>
+                <td>Average Accuracy</td>
+                <td>{{ average_accuracy }}</td>
+            </tr>
+        </tbody>
+       </table> 
+  
     <h2>Chart</h2>
     <table>
         <!-- Add your table headers here -->
@@ -38,24 +65,25 @@
                 <th>Close</th>
                 <th>Gain</th>
                 <th>Loss</th>
-                <th>Avg Gain</th>
                 <th>RS</th>
-                <th>14-Day RSI</th>
+                <th>RSI</th>
+                <th>Signal</th>
+
             </tr>
         </thead>
         <tbody>
             {% for data_row in data %}
-                <tr>
-                    
-                    <!-- Add your table data here -->
-                    <td>{{ data_row.Date }}</td>
-                    <td>{{ data_row.Adj_Close }}</td>
-                    <td>{{ data_row.Gain }}</td>
-                    <td>{{ data_row.Loss }}</td>
-                    <td>{{ data_row.Avg_gain }}</td>
-                    <td>{{ data_row.RS }}</td>
-                    <td>{{ data_row.RSI }}</td>
-                </tr>
+            <tr>
+                <!-- Add your table data here -->
+                <td>{{ data_row.Date }}</td>
+                <td>{{ data_row.Close }}</td>
+                <td>{{ data_row.Gain }}</td>
+                <td>{{ data_row.Loss }}</td>
+                <td>{{ data_row.RS }}</td>
+                <td>{{ data_row.RSI }}</td>
+                <td>{{ data_row.Signal }}</td>
+       
+            </tr>
             {% endfor %}
         </tbody>
     </table>
