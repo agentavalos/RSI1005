@@ -68,8 +68,6 @@
         <label for="crypto">Select Cryptocurrency:</label>
         <select name="crypto" id="crypto">
             <option value="btc">Bitcoin (BTC-USD)</option>
-            <option value="ltc">Litecoin (LTC-USD)</option>
-            <option value="eth">Ethereum (ETH_USD)</option>
         </select>
         <br><br>
         <label for="startdate">Start Date:</label>
@@ -89,7 +87,12 @@
         <p>Loading...</p>
     </div>
     <br><br>
-    <h2>Accuracy of RSI for BTC-USD please use a range of minimum 3 months</h2>
+    <h2>
+        
+     Please use a range of minimum 3 months to  a year. <br><br>
+     
+     The accuracy calculations are based on historical BTC-USD close and open prices.
+    </h2>
 
     <script>
         // Function to hide the loading spinner
@@ -119,20 +122,27 @@
             var dateReminder = document.getElementById("dateReminder");
 
             if (!startDate || !endDate) {
-                dateReminder.innerText = "Please select a date range.";
-                dateReminder.style.display = "block";
+    dateReminder.innerText = "Please select a date range.";
+    dateReminder.style.display = "block";
 
-                // Hide loading spinner since there was an error
-                hideLoadingSpinner()
+    // Hide loading spinner since there was an error
+    hideLoadingSpinner()
 
-                return false; // Prevent form submission
-            } else {
-                dateReminder.style.display = "none";
+    // Allow form submission
+    return false;
+} else {
+    dateReminder.style.display = "none";
 
-                // You may want to keep the loading spinner visible if there's more work to do
+    // Display loading spinner
+    showLoadingSpinner();
+    
 
-                return true; // Allow form submission
-            }
+    // You may want to keep the loading spinner visible if there's more work to do
+
+    // Prevent form submission until the work is complete
+    return false;
+}
+
         }
     </script>
 </body>
