@@ -1,91 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RSI Bitcoin Calculator - Results</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            color: black; /* Set text color to black */
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-top: 20px;
-            border: 1px solid black; /* Set table border to black */
-        }
-        th, td {
-            border: 1px solid black; /* Set cell borders to black */
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        color: black; /* Set text color to black */
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+        border: 1px solid black; /* Set table border to black */
+      }
+      th,
+      td {
+        border: 1px solid black; /* Set cell borders to black */
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>RSI Bitcoin Calculator - Results</h1>
-    
+
     <h2>Accuracy</h2>
     <table border="1">
-        <thead>
-            <tr>
-                <th>Signal</th>
-                <th>Accuracy</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Buy</td>
-                <td>{{ accuracy_buy }}%</td>
-            </tr>
-            <tr>
-                <td>Sell</td>
-                <td>{{ accuracy_sell }}%</td>
-            </tr>
-            <tr>
-                <td>Hold</td>
-                <td>{{ accuracy_hold }}%</td>
-            </tr>
-            <tr>
-                <td>Average Accuracy</td>
-                <td>{{ average_accuracy }}</td>
-            </tr>
-        </tbody>
-       </table> 
-  
+      <thead>
+        <tr>
+          <th>Signal</th>
+          <th>Accuracy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Buy</td>
+          <td>{{ accuracy_buy }}%</td>
+        </tr>
+        <tr>
+          <td>Sell</td>
+          <td>{{ accuracy_sell }}%</td>
+        </tr>
+        <tr>
+          <td>Hold</td>
+          <td>{{ accuracy_hold }}%</td>
+        </tr>
+        <tr>
+          <td>Average Accuracy</td>
+          <td>{{ average_accuracy }}</td>
+        </tr>
+      </tbody>
+    </table>
+
     <h2>Chart</h2>
     <table>
-        <!-- Add your table headers here -->
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Close</th>
-                <th>Gain</th>
-                <th>Loss</th>
-                <th>RS</th>
-                <th>RSI</th>
-                <th>Signal</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            {% for data_row in data %}
-            <tr>
-                <!-- Add your table data here -->
-                <td>{{ data_row.Date }}</td>
-                <td>{{ data_row.Close }}</td>
-                <td>{{ data_row.Gain }}</td>
-                <td>{{ data_row.Loss }}</td>
-                <td>{{ data_row.RS }}</td>
-                <td>{{ data_row.RSI }}</td>
-                <td>{{ data_row.Signal }}</td>
-       
-            </tr>
-            {% endfor %}
-        </tbody>
+      <!-- Add your table headers here -->
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Close</th>
+          <th>Gain</th>
+          <th>Loss</th>
+          <th>RS</th>
+          <th>RSI</th>
+          <th>Signal</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for data_row in data %}
+        <tr>
+          <!-- Add your table data here -->
+          <td>{{ data_row.Date }}</td>
+          <td>{{ data_row.Close }}</td>
+          <td>{{ data_row.Gain }}</td>
+          <td>{{ data_row.Loss }}</td>
+          <td>{{ data_row.RS }}</td>
+          <td>{{ data_row.RSI }}</td>
+          <td>{{ data_row.Signal }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
-</body>
+  </body>
 </html>
